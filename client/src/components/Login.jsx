@@ -1,6 +1,7 @@
-/* eslint-disable no-unused-vars */
+
 import "../css/Login.css"
 import { useState } from 'react'
+import axios from 'axios'
 
 const Login = () => {
 
@@ -11,7 +12,9 @@ const Login = () => {
   const [role, setRole] =useState('student')
 
   const handleSubmit = () => {
-    
+     axios.post('http://localhost:3006/auth/login',{username,password,role})
+     .then(res => console.log(res))
+     .catch(err => console.log(err))
   }
 
   return (
