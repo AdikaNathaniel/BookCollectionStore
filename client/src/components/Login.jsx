@@ -2,18 +2,31 @@
 import "../css/Login.css"
 import { useState } from 'react'
 import axios from 'axios'
+import { useNavigate } from "react-router-dom"
 
 const Login = () => {
 
-  const [username, setUsername] =useState('')
+  const [username, setUsername] = useState('')
 
-  const [password, setPassword] =useState('')
+  const [password, setPassword] = useState('')
 
-  const [role, setRole] =useState('student')
+  const [role, setRole] = useState('admin')
+
+  const navigate = useNavigate()
+
+
+  axios.defaults.withCredentials = true;
 
   const handleSubmit = () => {
      axios.post('http://localhost:3006/auth/login',{username,password,role})
-     .then(res => console.log(res))
+     .then(res => {
+      if(res.data.login && res.data.role === 'admin'){
+       navigate('/dashboard')
+      }else if (res.data.login && res.data.role === 'student'){
+        navigate('/')
+      }
+      console.log(res)
+     })
      .catch(err => console.log(err))
   }
 

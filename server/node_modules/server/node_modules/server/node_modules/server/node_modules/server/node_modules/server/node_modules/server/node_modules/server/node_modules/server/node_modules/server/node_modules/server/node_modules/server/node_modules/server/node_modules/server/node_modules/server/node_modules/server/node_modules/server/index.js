@@ -5,6 +5,7 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { Connection } from './db.js';
 import { AdminRouter } from './routes/auth.js';
+import { studentRouter } from './routes/student.js';
 
 dotenv.config();
 
@@ -24,6 +25,7 @@ app.use(cookieParser());
 
 // Routes
 app.use('/auth', AdminRouter);
+app.use('/student', studentRouter)
 
 // Database connection and server start
 async function startServer() {
