@@ -1,4 +1,6 @@
+/* eslint-disable react/prop-types */
 import '../css/Home.css'
+
 
 const Home = () => {
     return (
