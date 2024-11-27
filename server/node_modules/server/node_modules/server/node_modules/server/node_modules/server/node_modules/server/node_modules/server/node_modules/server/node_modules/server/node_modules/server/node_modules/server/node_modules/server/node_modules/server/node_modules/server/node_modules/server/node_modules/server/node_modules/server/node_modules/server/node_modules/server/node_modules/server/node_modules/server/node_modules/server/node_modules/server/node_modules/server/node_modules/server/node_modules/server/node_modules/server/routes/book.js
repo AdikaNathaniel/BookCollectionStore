@@ -5,13 +5,17 @@ import { verifyAdmin } from './auth.js';
 
 router.post('/add', verifyAdmin, async(req,res) => {
       try{
-        const {name, author,imageUrl} = req.body;
+        const {name, author,imageUrl,Id,genreName,genreId,price} = req.body;
 
         const newbook = new Book(
             {
                 name,
                 author,
-                imageUrl
+                imageUrl,
+                Id,
+                genreName,
+                genreId,
+                price
             })
             await newbook.save()
             return res.json({added:true})
@@ -29,6 +33,18 @@ router.get('/books', async(req,res) => {
         return res.json(err)
      }
 })
+
+
+router.get('/books/genre/:genreName', async (req, res) => {
+   const { genreName } = req.params;
+   try {
+       const books = await Book.find({ genreName });
+       res.status(200).send(books);
+   } catch (error) {
+       console.error(error);
+       res.status(500).send({ message: 'Error in fetching books by genre' });
+   }
+});
 
 
 router.get('/book/:id', async (req,res) => {

@@ -6,6 +6,10 @@ const EditBook = () => {
     const [name, setName] = useState('')
     const [author, setAuthor] = useState('')
     const [imageUrl, setImageUrl] = useState('')
+    const [Id,setId] = useState('')
+    const [genreName,setGenreName] = useState('')
+    const [genreId,setGenreId] = useState('')
+    const [price,setPrice] = useState('')
     const navigate = useNavigate()
     const {id} = useParams()
 
@@ -15,13 +19,17 @@ const EditBook = () => {
             setName(res.data.name)
             setAuthor(res.data.author)
             setImageUrl(res.data.imageUrl)
+            setId(res.data.Id)
+            setGenreName(res.data.genreName)
+            setGenreId(res.data.genreId)
+            setPrice(res.data.price)
         })
         .catch(err => console.log(err))
     }, [])
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.put('http://localhost:3006/book/book/'+id, {name, author, imageUrl})
+        axios.put('http://localhost:3006/book/book/'+id, {name, author, imageUrl,Id,genreName,genreId,price})
         .then(res => { 
             if(res.data.updated) {
                 navigate('/books')
@@ -52,6 +60,32 @@ const EditBook = () => {
           <input type="text" id="image" name="image" value={imageUrl}
           onChange={(e) => setImageUrl(e.target.value)}/>
         </div>
+
+        <div className="form-group">
+          <label htmlFor="image">Id:</label>
+          <input type="text" id="image" name="image" value={Id}
+          onChange={(e) => setId(e.target.value)}/>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="image">Genre Name:</label>
+          <input type="text" id="image" name="genreName" value={Id}
+          onChange={(e) => setGenreName(e.target.value)}/>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="image">Genre Id:</label>
+          <input type="text" id="image" name="genreId" value={Id}
+          onChange={(e) => setGenreId(e.target.value)}/>
+        </div>
+
+
+        <div className="form-group">
+          <label htmlFor="image">Price:</label>
+          <input type="string" id="image" name="price" value={Id}
+          onChange={(e) => setPrice(e.target.value)}/>
+        </div>
+
         <button type="submit">Update </button>
       </form>
     </div>

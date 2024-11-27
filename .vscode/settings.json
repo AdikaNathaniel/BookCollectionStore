@@ -3,6 +3,7 @@
         "addbook",
         "addstudent",
         "adminpassword",
+        "gname",
         "newbook",
         "newstudent"
     ]

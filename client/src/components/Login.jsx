@@ -3,7 +3,8 @@ import {useNavigate} from 'react-router-dom'
 import '../css/Login.css'
 import axios from 'axios'
 import { useState } from 'react'
-const Login = ({setRoleVar}) => {
+import PropTypes from 'prop-types'
+const Login = ({ setRoleVar }) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [role, setRole] = useState('admin')
@@ -51,6 +52,9 @@ const Login = ({setRoleVar}) => {
       </div>
     </div>
   )
+}
+Login.propTypes = {
+  setRoleVar: PropTypes.func.isRequired,
 }
 
 export default Login

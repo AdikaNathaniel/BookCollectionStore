@@ -5,12 +5,16 @@ import  {useNavigate} from 'react-router-dom'
 const AddBook = () => {
     const [name, setName] = useState('')
     const [author, setAuthor] = useState('')
+    const [Id,setId] = useState('')
     const [imageUrl, setImageUrl] = useState('')
+    const [genreName,setGenreName] = useState('')
+    const [genreId,setGenreId] = useState('')
+    const [price,setPrice] = useState('')
     const navigate = useNavigate()
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post('http://localhost:3006/book/add', {name, author, imageUrl})
+        axios.post('http://localhost:3006/book/add', {name, author, imageUrl,Id,genreName,genreId,price})
         .then(res => { 
             if(res.data.added) {
                 navigate('/books')
@@ -41,6 +45,31 @@ const AddBook = () => {
           <input type="text" id="image" name="image" 
           onChange={(e) => setImageUrl(e.target.value)}/>
         </div>
+        <div className="form-group">
+          <label htmlFor="image">Id:</label>
+          <input type="text" id="image" name="image" 
+          onChange={(e) => setId(e.target.value)}/>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="image">Genre Name:</label>
+          <input type="text" id="image" name="gname" 
+          onChange={(e) => setGenreName(e.target.value)}/>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="image">Genre Id:</label>
+          <input type="text" id="image" name="genreId" 
+          onChange={(e) => setGenreId(e.target.value)}/>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="image">Price:</label>
+          <input type="string" id="image" name="price" 
+          onChange={(e) => setPrice(e.target.value)}/>
+        </div>
+
+        
         <button type="submit">Add </button>
       </form>
     </div>
