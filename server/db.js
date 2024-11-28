@@ -1,12 +1,10 @@
 import mongoose from "mongoose";
-import dotenv from 'dotenv';
-
-dotenv.config();
+import dotenv from 'dotenv/config';
 
 const Connection = async () => {
     try {
-        await mongoose.connect(process.env.URL);
-        
+        await mongoose.connect(process.env.MONGO_URL);
+
         // Create a test collection and document
         const testSchema = new mongoose.Schema({
             name: String,
@@ -18,17 +16,17 @@ const Connection = async () => {
 
         // This will create both the database and collection
         const TestModel = mongoose.model('TestCollection', testSchema);
-        
+
         // Create a test document
         await TestModel.create({ name: 'test_document' });
-        
+
         console.log("Connected and Database Created");
-        
+
         // Print all available databases
         const admin = mongoose.connection.db.admin();
         const dbList = await admin.listDatabases();
         console.log("Available databases:", dbList.databases.map(db => db.name));
-        
+
     } catch (err) {
         console.log("Error:", err);
     }

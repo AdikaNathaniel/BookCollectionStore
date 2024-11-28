@@ -10,13 +10,13 @@ dotenv.config();
 async function AdminAccount() {
     try {
         // First connect to database
-        await mongoose.connect(process.env.URL);
+        await mongoose.connect(process.env.MONGO_URL);
         console.log("Connected to database");
 
         const adminCount = await Admin.countDocuments();
         
         if (adminCount === 0) {
-            const hashPassword = await bcrypt.hash('adminpassword', 10);
+            const hashPassword = await bcrypt.hash('admin', 10);
             const newAdmin = new Admin({
                 username: 'admin',
                 password: hashPassword

@@ -1,5 +1,4 @@
 import express from 'express';
-import dotenv from 'dotenv';
 import cors from 'cors';
 // import './db.js';
 import cookieParser from 'cookie-parser';
@@ -11,7 +10,8 @@ import {Book} from './models/Book.js';
 import { Student } from './models/Student.js';
 import { Admin } from  './Models/Admin.js'
 
-dotenv.config();
+import dotenv from 'dotenv/config';
+const port= process.env.PORT
 
 const app = express();
 
