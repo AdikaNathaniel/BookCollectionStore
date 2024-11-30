@@ -13,4 +13,5 @@ const adminSchema = new mongoose.Schema({
     }
 });
 
-export const Admin = mongoose.model('Admin', adminSchema);
+// Check if the model already exists before defining it
+export const Admin = mongoose.models.Admin || mongoose.model('Admin', adminSchema);
