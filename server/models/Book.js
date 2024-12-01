@@ -23,8 +23,9 @@ const bookSchema = new mongoose.Schema({
         required: true
     },
     price:{
-        type: String,
-        required: true
+        type: Number,
+        required: true,
+        min : 0
     }
 })
 

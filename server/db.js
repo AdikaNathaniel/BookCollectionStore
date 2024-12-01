@@ -1,9 +1,23 @@
 import mongoose from "mongoose";
-import dotenv from 'dotenv/config';
+import { config } from 'dotenv';
+config();
+
 
 const Connection = async () => {
     try {
-        await mongoose.connect(process.env.MONGO_URL);
+        const mongoUrl = process.env.MONGO_URL;
+        if (!mongoUrl) {
+            throw new Error("MONGO_URL is not defined in environment variables");
+        }
+      
+        await mongoose.connect(mongoUrl, {
+            
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            // Add connection timeout and socket timeout
+            connectTimeoutMS: 10000, // 10 seconds
+            socketTimeoutMS: 45000,  // 45 seconds
+        });
 
         // Create a test collection and document
         const testSchema = new mongoose.Schema({
@@ -29,6 +43,9 @@ const Connection = async () => {
 
     } catch (err) {
         console.log("Error:", err);
+        // Log more detailed error information
+        console.log("Error Name:", err.name);
+        console.log("Error Message:", err.message);
     }
 };
 
