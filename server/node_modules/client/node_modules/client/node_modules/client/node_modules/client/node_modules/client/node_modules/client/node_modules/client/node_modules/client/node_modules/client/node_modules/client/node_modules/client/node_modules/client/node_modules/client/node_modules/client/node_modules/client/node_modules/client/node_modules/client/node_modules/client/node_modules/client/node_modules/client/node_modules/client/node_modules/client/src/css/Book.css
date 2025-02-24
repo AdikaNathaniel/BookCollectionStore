@@ -12,7 +12,7 @@
   border-radius: 8px;
   overflow: hidden;
   margin: 10px;
-  width: 200px;
+  width: 400px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease-in-out;
 }
